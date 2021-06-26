@@ -1,0 +1,75 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <link rel="stylesheet" href="css/listeRattrapage.css">
+    </head>    
+    <body>
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
+        <script src="js/crypto.js"></script>
+        
+    
+
+            <table style="margin-top: 30%">
+                <thead>
+                <tr>
+                    <th>Nom module</th>
+                    <th>Classe</th>
+                    <th>Nombre d'élève</th>
+                    <th>durée</th>
+                    <th>Date de l'épreuve</th>
+            
+                </tr>
+                </thead>
+                   <tbody id = "epreuve">
+                   
+                   </tbody>
+            
+                   </table>
+
+
+        <script>
+    
+            var epreuves =  document.getElementById("epreuve");
+            var request= $.ajax({
+            url: "http://serveur1.arras-sio.com/symfony4-4055/PT-CSAPO-SAN/public/api/epreuves?page=1",
+            method: "GET",
+            dataType: "json",
+            beforeSend: function( xhr ) {
+               xhr.overrideMimeType( "application/json; charset=utf-8" );
+            }});
+            request.done(function( msg ) {
+               
+               $.each(msg, function(index,e){
+                var a = '<tr> <td> <a href="">'+ e.nomModule +' </a></td>  <td>' +  e.classe +' </td> <td>'+ e.nombreEleve +' </td> <td> '+ e.duree +'</td> <td> '+ (e.dateEpreuve.substr(0, 16)).replace('T', '-') +' </td> </tr>';
+                             
+                epreuve.innerHTML += a;
+            
+               
+               });
+               
+            });
+            // Fonction qui se lance lorsque l’accès au web service provoque une erreur
+            request.fail(function( jqXHR, textStatus ) {
+            alert ('erreur');
+            });
+            
+            
+            </script>
+    
+
+</body>
+
+
+
+
+
+</html>
