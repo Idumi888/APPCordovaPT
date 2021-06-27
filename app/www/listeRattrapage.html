@@ -49,11 +49,11 @@
             request.done(function( msg ) {
                
                $.each(msg, function(index,e){
-                var a = '<tr> <td> <a href="">'+ e.nomModule +' </a></td>  <td>' +  e.classe +' </td> <td>'+ e.nombreEleve +' </td> <td> '+ e.duree +'</td> <td> '+ (e.dateEpreuve.substr(0, 16)).replace('T', '-') +' </td> </tr>';
+                var a = '<tr> <td> <a onclick="epreuveC(' + e.id + ','+e.duree+')">'+ e.nomModule +' </a></td>  <td>' +  e.classe +' </td> <td>'+ e.nombreEleve +' </td> <td> '+ e.duree +'</td> <td> '+ (e.dateEpreuve.substr(0, 16)).replace('T', '-') +' </td> </tr>';
                              
                 epreuve.innerHTML += a;
             
-               
+            
                });
                
             });
@@ -61,6 +61,12 @@
             request.fail(function( jqXHR, textStatus ) {
             alert ('erreur');
             });
+
+            function epreuveC(idepreuve, duree) {
+                document.location.href="epreuveCour.html?idEpr="+ idepreuve+"?tps="+duree;
+            
+        
+        }
             
             
             </script>

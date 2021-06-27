@@ -71,20 +71,7 @@
     alert ('erreur');
     });
     }
-    function connexionBis(){
-      var username = "Admin";
-      var password = "e3afed0047b08059d0fada10f400c1e5";
-      var idUtil = 2 ;
-      if( login.value == username){
-         var mdp = CryptoJS.MD5(passwordU.value);
-         console.log(mdp);
-        if( mdp == password){
-          document.location.href="listeRattrapage.html?idUtil="+ idUtil;
-       }
-       else{login.value = "dd";}
-       }
-      
-    }
+   
     </script>
     </body>
 </html>
